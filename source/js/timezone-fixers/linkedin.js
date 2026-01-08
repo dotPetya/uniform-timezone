@@ -27,6 +27,14 @@ const fixer = new Fixer('LinkedIn', [
 		label: 'comment',
 		url: getCommentUrl,
 	},
+	{
+		name: 'Feed Item Timestamp',
+		selector: '.update-components-actor__sub-description',
+		attachTo: node => node,
+		timestamp: getFeedItemTimestamp,
+		label: 'feed-item',
+		url: () => null,
+	},
 ]);
 
 function getPublicationTimestamp(_) {
@@ -67,6 +75,17 @@ function getCommentUrl(node) {
 
 function checkPostUrl(_) {
 	return document.URL.startsWith('https://www.linkedin.com/posts/');
+}
+
+function getFeedItemTimestamp(node) {
+	const parnt = node.closest('[data-finite-scroll-hotkey-context="FEED"] > div > div');
+	if (parnt.getAttributeNames().includes('data-id')) {
+		const _id = Number.parseInt(parnt.dataset.id.split(':')[3], 10);
+		const first41Bits = Number.parseInt((_id).toString(2).slice(0, 41), 2);
+		return moment.unix(first41Bits / 1000);
+	}
+
+	return null;
 }
 
 fixer.start();
