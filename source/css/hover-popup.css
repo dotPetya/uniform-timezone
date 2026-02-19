@@ -61,7 +61,8 @@
 	margin-left: auto;
 	/* margin-right: auto; */
 	display: inline-block;
-	color: initial;
+	color: black;
+	background: #fff;
 }
 
 .timezone-fixer-popup a {
