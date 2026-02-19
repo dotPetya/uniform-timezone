@@ -26,6 +26,7 @@ Install on [brave/chrome](https://chrome.google.com/webstore/detail/uniform-time
 | Bluesky   | ✅*     | works only for english translation of the platform, hard to expand                                                                               |
 | Wayback Machine   | ✅     | |
 | Linkedin  | ✅*   | works for comments, posts, and feed items |
+| Threads   | ✅      |                                                                                                                                                  |
 | Youtube   | TODO   | come help! it requires the official API (see [amnesty youtube dataviewer](https://citizenevidence.amnestyusa.org/)) / and possibly file metadata |
 | Facebook  | TODO   | come help!                                                                                                                                       |
 | GitHub    | TODO   | come help!                                                                                                                                       |
@@ -85,6 +86,10 @@ How to use? Hover over any time element on the page.
 How to use? Hover over any time element on the page.
 
  * Does not extract the POST URLs, and the comment URLs are references but can't always be resolved/opened.
+
+### Threads ✅
+How to use?
+1. Hover over any time element on the page.
 
 ---
 
