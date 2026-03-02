@@ -14,15 +14,20 @@ const fixer = new Fixer('Reddit', [
 		selector: 'faceplate-timeago, faceplate-date',
 		attachTo: node => node,
 		timestamp: node => node.getAttribute('ts'),
-		url: node => {
+		url(node) {
 			const link = node.closest('a');
-			if (link?.href) return link.href;
+			if (link?.href) {
+				return link.href;
+			}
 
-			const redditEl = node.closest('shreddit-post, shreddit-comment, shreddit-profile-comment');
-			const path = redditEl?.getAttribute('permalink') || redditEl?.getAttribute('href');
+			const redditElement = node.closest('shreddit-post, shreddit-comment, shreddit-profile-comment');
+			const path = redditElement?.getAttribute('permalink') || redditElement?.getAttribute('href');
 			if (path) {
-				try { return new URL(path, window.location.origin).href; }
-				catch { return window.location.href; }
+				try {
+					return new URL(path, window.location.origin).href;
+				} catch {
+					return window.location.href;
+				}
 			}
 
 			return window.location.href;
@@ -33,11 +38,12 @@ const fixer = new Fixer('Reddit', [
 		selector: 'time.live-timestamp',
 		attachTo: node => node,
 		timestamp: node => node.getAttribute('datetime'),
-		url: node => {
+		url(node) {
 			const thing = node.closest('.thing');
 			if (thing?.dataset.permalink) {
 				return new URL(thing.dataset.permalink, window.location.origin).href;
 			}
+
 			return node.closest('a')?.href ?? window.location.href;
 		},
 	},
